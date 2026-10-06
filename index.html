@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Olian 店家清單</title>
+<style>
+  :root { --green: #5FA980; --ink: #2f3a33; --muted: #7a857e; --bg: #f7faf8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: var(--bg); color: var(--ink); font-family: -apple-system, "PingFang TC", "Noto Sans TC", sans-serif; padding: 24px 16px; }
+  .card { width: 100%; max-width: 360px; background: #fff; border-radius: 24px; padding: 32px 24px; text-align: center;
+    border: 1px solid #e3efe7; }
+  h1 { font-size: 20px; margin: 0 0 8px; }
+  p { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0 0 24px; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 48px; border-radius: 24px;
+    background: var(--green); color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; border: 0; }
+  .btn svg { width: 20px; height: 20px; fill: currentColor; }
+  .hint { margin: 16px 0 0; font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1 id="title">正在開啟 Olian…</h1>
+  <p id="desc">朋友分享了一份店家清單給你,開啟 App 後會自動匯入。</p>
+  <a class="btn" id="openBtn" href="#">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg>
+    開啟 Olian
+  </a>
+  <p class="hint" id="hint">沒有自動跳轉的話,請按上方按鈕。</p>
+</div>
+<script>
+  var d = location.hash.slice(1);
+  var isAndroid = /Android/i.test(navigator.userAgent);
+  var appUrl = 'olian://import?d=' + d;
+  var target = isAndroid
+    ? 'intent://import?d=' + d + '#Intent;scheme=olian;package=com.olian.app;end'
+    : appUrl;
+  var btn = document.getElementById('openBtn');
+  if (!d) {
+    document.getElementById('title').textContent = 'Olian';
+    document.getElementById('desc').textContent = '這個連結沒有帶到店家清單,請重新掃描分享的 QR code。';
+    btn.style.display = 'none';
+    document.getElementById('hint').style.display = 'none';
+  } else {
+    btn.href = target;
+    location.href = target;
+    setTimeout(function () {
+      document.getElementById('title').textContent = '還沒開啟嗎?';
+      document.getElementById('hint').textContent = '請確認手機已安裝 Olian,再按上方按鈕。';
+    }, 2500);
+  }
+</script>
+</body>
+</html>
