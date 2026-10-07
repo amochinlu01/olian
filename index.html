@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Olian 店家清單</title>
+<title>Olian 好物分享</title>
+<meta property="og:title" content="Olian 好物分享">
+<meta property="og:description" content="朋友分享了他的好店給你,打開 Olian 看看。">
+<meta name="description" content="朋友分享了他的好店給你,打開 Olian 看看。">
 <style>
   :root { --green: #5FA980; --ink: #2f3a33; --muted: #7a857e; --bg: #f7faf8; }
   * { box-sizing: border-box; }
@@ -22,7 +25,7 @@
 <body>
 <div class="card">
   <h1 id="title">正在開啟 Olian…</h1>
-  <p id="desc">朋友分享了一份店家清單給你,開啟 App 後會自動匯入。</p>
+  <p id="desc">朋友分享了他的好店給你,開啟 Olian 就能看到。</p>
   <a class="btn" id="openBtn" href="#">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg>
     開啟 Olian
@@ -39,7 +42,7 @@
   var btn = document.getElementById('openBtn');
   if (!d) {
     document.getElementById('title').textContent = 'Olian';
-    document.getElementById('desc').textContent = '這個連結沒有帶到店家清單,請重新掃描分享的 QR code。';
+    document.getElementById('desc').textContent = '這個連結沒有帶到分享內容,請重新掃描分享的 QR code。';
     btn.style.display = 'none';
     document.getElementById('hint').style.display = 'none';
   } else {
